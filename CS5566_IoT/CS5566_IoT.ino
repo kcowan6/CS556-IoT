@@ -6,7 +6,6 @@
 #define WIFI_SSID "TampaBae"                                             // input your home or public wifi name 
 #define WIFI_PASSWORD "lealupin"                                             //password of wifi ssid
 char server[] = "mail.smtpcorp.com";
-ADC_MODE(ADC_VCC);
  
 #define DHTPIN D4                                                           // what digital pin we're connected to
 #define DHTTYPE DHT11                                                       // select dht type as DHT 11 or DHT22
