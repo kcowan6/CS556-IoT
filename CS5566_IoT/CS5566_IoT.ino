@@ -60,6 +60,8 @@ void loop()
   String fireTemp = String(t) + String("°F");                                //convert integer temperature to string temperature
   delay(5000);
   
+  String room = "";
+ 
   Firebase.pushString("/DHT11/ENTER_ROOM_HERE/Humidity", fireHumid);           //setup humidity path and send readings
   Firebase.pushString("/DHT11/ENTER_ROOM_HERE/Temperature", fireTemp);         //setup temperature path and send readings
 
@@ -75,7 +77,7 @@ void loop()
     // Only send a new email every 5 failures
     if ((numEmailsSent % 5) == 0)
     {
-      byte ret = sendEmail(h, t, lowHum, highHum, lowTemp, highTemp); 
+      byte ret = sendEmail(h, t, lowHum, highHum, lowTemp, highTemp, room); 
     }
 
     numEmailsSent++;
@@ -94,7 +96,7 @@ void loop()
  * 
  * @return 1 if successful, 0 otherwise
  */
-byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, float highTemp)
+byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, float highTemp, String room)
 {
   byte thisByte = 0;
   byte respCode;
@@ -170,7 +172,7 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   Serial.println(F("Sending email"));   
   client.println(F("To: kkc6@vt.edu"));   // change to your address
   client.println(F("From: kkc6@vt.edu")); // change to recipient address
-  client.println(F("Subject: Warning - ESP8266 Temperature and Humidity Alert\r\n"));
+  client.println(F("Subject: Warning - ESP8266 Temperature and Humidity Alert " + room + "\r\n"));
  
   client.println(F("Warning: the temperature and/or humidity has moved outside the acceptable threshold."));
   client.println();
