@@ -1,8 +1,8 @@
 #include <ESP8266WiFi.h>                                                    // esp8266 library
 #include <FirebaseArduino.h>                                                // firebase library
 #include "DHT.h"                                                            // dht11 temperature and humidity sensor library
-#define FIREBASE_HOST "cs5566-iot-temp-humidity.firebaseio.com"             // the project name address from firebase id
-#define FIREBASE_AUTH "oeyVgZOzdQKm8tKc8LC0MoojAVqCu6iZVBUAoBux"            // the secret key generated from firebase
+#define FIREBASE_HOST "your_host.firebaseio.com"             // the project name address from firebase id
+#define FIREBASE_AUTH "your_secret"            // the secret key generated from firebase
 #define WIFI_SSID "ssid"                                                    // input your home or public wifi name 
 #define WIFI_PASSWORD "password"                                            // password of wifi ssid
 char server[] = "mail.smtpcorp.com";                                        // server for sending emails
@@ -133,7 +133,7 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   
   Serial.println(F("Sending User"));
   // your base64, ASCII encoded user
-  client.println("a2tjNkB2dC5lZHU="); // SMTP UserID
+  client.println("base64_username"); // SMTP UserID
 
   // Check for server response
   if (!serverCheck())
@@ -141,7 +141,7 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   
   Serial.println(F("Sending Password"));
   // your base64, ASCII encoded password
-  client.println("Q1M1NTY2SU9U");//  SMTP Password
+  client.println("base64_pass");//  SMTP Password
 
   // Check for server response
   if (!serverCheck())
