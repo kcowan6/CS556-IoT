@@ -172,10 +172,11 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   Serial.println(F("Sending email"));   
   client.println(F("To: kkc6@vt.edu"));   // change to your address
   client.println(F("From: kkc6@vt.edu")); // change to recipient address
-  client.println(F("Subject: Warning - ESP8266 Temperature and Humidity Alert " + room + "\r\n"));
+  client.println(F("Subject: Warning - ESP8266 Temperature and Humidity Alert\r\n"));
  
   client.println(F("Warning: the temperature and/or humidity has moved outside the acceptable threshold."));
-  client.println();
+  client.print(F("The board with issue: ");
+  client.println(room);               
   
   client.print(F("Recommended temperature range (F): "));
   client.print(lowTemp);
