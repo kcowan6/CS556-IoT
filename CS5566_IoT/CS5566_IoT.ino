@@ -37,6 +37,9 @@ void setup()
   dht.begin();  //Start reading dht sensor
 }
 
+/**
+ * Runs internal calls until disconnected from power
+ */
 void loop()
 {
   float h = dht.readHumidity();                                              // Reading temperature or humidity takes about 250 milliseconds!
