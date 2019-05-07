@@ -113,7 +113,7 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   }
 
   // Check for server response
-  if (!eRcv())
+  if (!serverCheck())
     return 0;
 
   // Send Extended HELLO
@@ -121,14 +121,14 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   client.println("EHLO www.example.com");
 
   // Check for server response
-  if (!eRcv())
+  if (!serverCheck())
     return 0;
 
   Serial.println(F("Sending auth login"));
   client.println("auth login");
 
   // Check for server response
-  if (!eRcv())
+  if (!serverCheck())
     return 0;
   
   Serial.println(F("Sending User"));
@@ -136,7 +136,7 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   client.println("a2tjNkB2dC5lZHU="); // SMTP UserID
 
   // Check for server response
-  if (!eRcv())
+  if (!serverCheck())
     return 0;
   
   Serial.println(F("Sending Password"));
@@ -144,21 +144,21 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   client.println("Q1M1NTY2SU9U");//  SMTP Password
 
   // Check for server response
-  if (!eRcv())
+  if (!serverCheck())
     return 0;
      
   Serial.println(F("Sending From"));   // change to your email address (sender)
   client.println(F("MAIL From: kkc6@vt.edu"));// not important 
 
   // Check for server response
-  if (!eRcv())
+  if (!serverCheck())
     return 0;   
   
   Serial.println(F("Sending To"));
   client.println(F("RCPT To: kkc6@vt.edu")); // change to recipient address
 
   // Check for server response
-  if (!eRcv())
+  if (!serverCheck())
     return 0;
 
   // Alert server that email is to follow
@@ -166,7 +166,7 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   client.println(F("DATA"));
 
   // Check for server response
-  if (!eRcv())
+  if (!serverCheck())
     return 0;
     
   Serial.println(F("Sending email"));   
@@ -196,7 +196,7 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   client.println(F("."));
 
   // Check for server response
-  if (!eRcv())
+  if (!serverCheck())
     return 0;
 
   // Alert server that connection is ending
@@ -204,7 +204,7 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
   client.println(F("QUIT"));
 
   // Check for server response
-  if (!eRcv())
+  if (!serverCheck())
     return 0;
   
   client.stop();
@@ -217,7 +217,7 @@ byte sendEmail(float h, float t, float lowHum, float highHum, float lowTemp, flo
  * 
  * @return 1 if successful, 0 otherwise
  */
-byte eRcv()
+byte serverCheck()
 {
   byte respCode;
   byte thisByte;
