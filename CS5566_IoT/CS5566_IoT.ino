@@ -3,8 +3,8 @@
 #include "DHT.h"                                                            // dht11 temperature and humidity sensor library
 #define FIREBASE_HOST "cs5566-iot-temp-humidity.firebaseio.com"             // the project name address from firebase id
 #define FIREBASE_AUTH "oeyVgZOzdQKm8tKc8LC0MoojAVqCu6iZVBUAoBux"            // the secret key generated from firebase
-#define WIFI_SSID "TampaBae"                                                // input your home or public wifi name 
-#define WIFI_PASSWORD "lealupin"                                            // password of wifi ssid
+#define WIFI_SSID "ssid"                                                    // input your home or public wifi name 
+#define WIFI_PASSWORD "password"                                            // password of wifi ssid
 char server[] = "mail.smtpcorp.com";                                        // server for sending emails
 int numEmailsSent = 0;                                                      // count of sent alert emails
 WiFiClient client;
@@ -57,8 +57,8 @@ void loop()
   String fireTemp = String(t) + String("°F");                                //convert integer temperature to string temperature
   delay(5000);
   
-  Firebase.pushString("/DHT11/Fridge/Humidity", fireHumid);         //setup humidity path and send readings
-  Firebase.pushString("/DHT11/Fridge/Temperature", fireTemp);       //setup temperature path and send readings
+  Firebase.pushString("/DHT11/ENTER_ROOM_HERE/Humidity", fireHumid);           //setup humidity path and send readings
+  Firebase.pushString("/DHT11/ENTER_ROOM_HERE/Temperature", fireTemp);         //setup temperature path and send readings
 
   float lowHum = 20;                                                           //Set this number yourself - lowest allowed humidity
   float lowTemp = 20;                                                          //Set this number yourself - highest allowed humidity
